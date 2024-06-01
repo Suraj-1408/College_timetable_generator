@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Student Registration</h2>
+
+        <form  method="POST" action="{{ url_for('student.student_register') }}" >
+            {% if mesage is defined and mesage %}
+
+            <div class="alert alert-warning"> {{ mesage }}     </div>
+
+            {% endif %}
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="student_name" id="student_name" placeholder="Enter Name">
+            </div>
+
+            <div class="form-group">
+                <label for="rollno">Roll no</label>
+                <input type="number" class="form-control" name="roll_no" id="roll_no" placeholder="Enter Roll no">
+            </div>
+
+            <div class="form-group">
+                <label for="class">Class</label>
+                <input type="text" class="form-control" name="class" id="class" placeholder="Enter your class">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+
+            <p class="bottom">Already have an account?<a class="bottom" href="{{url_for('student.student_login')}}"> Login here </a></p>
+        </form>
+    </div>
+</body>
+</html>
