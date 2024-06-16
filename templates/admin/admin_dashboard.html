@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+=======
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Admin Dashbaord</h1>
+        </div>
+        <br>
+        
+        <div class="row">
+            Logged in: <strong> {{session.admin_name}}  | <a href="{{ url_for('admin.logout') }}">Logout</a>
+        </div>
+
+        <br><br>
+        <div class="row">
+            <h2>Welcome to Admin Dashboard.</h2>
+        </div>
+
+    </div>
+</body>
+</html>
+ 
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Get Started</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="">
+>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
     <style>
         body {
+<<<<<<< HEAD
             padding-top: 3.5rem;
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
@@ -70,10 +114,30 @@
             border-radius: 10px;
         }
     </style>
+=======
+    padding-top: 3.5rem;
+    }
+
+    nav {
+            font-family: sans-serif;
+             
+        }
+
+    .navbar-brand {
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    </style>
+
+>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
 </head>
 <body>
     <form id="form1">
         <header>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <a class="navbar-brand" href="#"><b>TIMETABLE GENERATOR</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,6 +145,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ url_for('admin.list_professors') }}">Teaching Professors</a>
                         </li>
@@ -99,11 +164,39 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ url_for('admin.logout') }}">Logout</a>
                         </li>
+=======
+                    <li class="nav-item active">
+                        <a class="nav-link" href="">Get Started</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="">Add Teachers</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="">Add Rooms</a>
+                    </li>
+                    <li class="nav-item active">
+		                <a class="nav-link" href="">Add Timings</a>
+		            </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="">Add Courses</a>
+                    </li>
+                    <li class="nav-item active">
+			            <a class="nav-link" href="">Add Sections</a>
+		            </li>
+                    <li class="nav-item active">
+			            <a class="nav-link" href="">Generate Timetable</a>
+		            </li>
+                    <li class="nav-item active">
+			            <a class="nav-link" href=" {{ url_for('admin.logout') }}"> Logout </a>
+		            </li>
+
+>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
                     </ul>
                 </div>
             </nav>
         </header>
 
+<<<<<<< HEAD
         <main role="main">
             <div class="jumbotron">
                 <div class="container">
@@ -152,6 +245,72 @@
         <footer class="container">
             <p>&copy; ttgs. All Rights Reserved</p>
         </footer>
+=======
+         <main role="main">
+
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-4">Hello {{ session.admin_name }}</h1>
+      <p>Welcome to a timetable management system for colleges and universities to schedule their organization's timetable. TTGS started off as a company that formed strong relationships with schools, colleges and universities to help them generate their timetable with
+         ease and maximum efficiency thus saving the organization's valuable time. Get started by referring to the flow of the system below or Contact Us with any queries or difficulties.
+      </p>
+      <p><a class="btn btn-primary btn-lg" href="{{ url_for('timetable.index')}}" role="button">Get Started &raquo;</a>&nbsp;&nbsp;&nbsp;</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-4">
+        <h2>1. Add Professor</h2>
+        <p>Navigate to the "Add Professor" section and add the corresponding details. Incorrect Details can also be removed via the "Edit Teacher" option.</p>
+
+      </div>
+      <div class="col-md-4">
+        <h2>2. Add Rooms</h2>
+        <p>Navigate to the "Add Rooms" section and add the corresponding details. Incorrect Details can also be removed via the "Edit Rooms" option.</p>
+
+      </div>
+      <div class="col-md-4">
+        <h2>3. Add Timings</h2>
+        <p>Navigate to the "Add Timings" section and add the corresponding details. Incorrect Details can also be removed via the "Edit Timings" option.</p>
+
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <h2>4. Add Courses</h2>
+        <p>Navigate to the "Add Courses" section and add the corresponding details. Incorrect Details can also be removed via the "Edit Courses" option.</p>
+
+      </div>
+      
+      <div class="col-md-4">
+        <h2>5. Add Sections</h2>
+        <p>Navigate to the "Add Sections" section and add the corresponding details. Incorrect Details can also be removed via the "Edit Sections" option.</p>
+
+      </div>
+
+      <div class="col-md-4">
+        <h2>6. Generate Timetable</h2>
+        <p>Navigate to the "Generate Timetable" Section and click on Generate Timetable and wait patiently as our algorithm works its magic.</p>
+      </div>
+    </div>
+
+     <br>
+
+    </div>
+
+    <hr>
+
+  </div>
+
+</main>
+
+<footer class="container">
+  <p>&copy; ttgs. All Rights Reserved</p>
+</footer>
+>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
     </form>
 </body>
 </html>
@@ -159,3 +318,8 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
