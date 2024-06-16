@@ -5,21 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Timetable Generator</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .container { width: 100%; max-width: 1200px; margin: auto; padding: 20px; text-align: center; }
-        .header { background-color: #4CAF50; color: white; padding: 20px 0; }
-        .hero { padding: 50px 0; }
-        .cta-buttons { margin: 20px 0; }
-        .cta-buttons a { text-decoration: none; margin: 10px; padding: 15px 25px; color: white; background-color: #4CAF50; border-radius: 5px; }
-        .links { margin-top: 40px; }
-        .links a { text-decoration: none; color: #4CAF50; margin: 10px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .header { 
+            background-color: #4CAF50; 
+            color: white; 
+            padding: 20px 0; 
+        }
+        .container { 
+            padding: 20px; 
+        }
+        .cta-buttons a, .links a { 
+            display: inline-block; 
+            margin: 10px; 
+            padding: 10px 20px; 
+            color: white; 
+            background-color: #4CAF50; 
+            border-radius: 5px; 
+            text-decoration: none; 
+        }
+        .links a { 
+            background-color: transparent; 
+            color: #4CAF50; 
+            font-weight: bold;
+        }
+        .taglines p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>College Timetable Generator</h1> 
         <p>Effortlessly Plan and Manage Your College Schedule</p>
-       
     </div>
     <div class="container">
         <div class="hero">
@@ -28,12 +52,17 @@
                 <a href="/signup">Get Started for Free</a>
                 <a href="/how-it-works">See How It Works</a>
             </div>
+            <div class="taglines">
+                <p>For Students: "Stay Organized, Stay Ahead."</p>
+                <p>For Teachers: "Effortless Class Management."</p>
+            </div>
         </div>
         <div class="links">
-            <a href="/admin-login">Admin Sign-In</a>
+            <a href="{{ url_for('admin.admin_login')}}">Admin Sign-In</a>
             <a href="{{ url_for('student.student_login') }}">Student Sign-In</a>
-            <a href="/teacher-login">Teacher Sign-In</a>
+            <a href="{{url_for('professor.professor_login')}}">Teacher Sign-In</a>
         </div>
     </div>
 </body>
 </html>
+
