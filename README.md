@@ -4,6 +4,10 @@ just visiting to this application.Admin has the highest privilege which takes co
 existing timetable according to different circumstances.Futher it also manages in adding upcoming new courses professors in the department and prepare well organised 
 and conflict free timetable for students leading to appropriate synchronization between students and professors.
 
+## HomePage
+![Home](assets/Home_112857~2.png)
+
+
 # Functionalities of this application
 ## Authorized Access
 only Authorized people can access this application that are legally associated to the organization ensuring privacy & Security to every individual.
@@ -20,6 +24,7 @@ Schedule new lectures according to desired timeslots.
 Different Constraints are added to prevent conflict of two lecture that are schedule.
 And finally after all inputs a timetable gets generated in the form of pdf , that futher can be seen in student and Professor Dashboard.
 ADMIN DASHBOARD
+![Admin Dashboard](assets/Admin%20Dashboard_112846~2.png)
 
 
 
