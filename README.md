@@ -24,7 +24,7 @@ Schedule new lectures according to desired timeslots.
 Different Constraints are added to prevent conflict of two lecture that are schedule.
 And finally after all inputs a timetable gets generated in the form of pdf , that futher can be seen in student and Professor Dashboard.
 ADMIN DASHBOARD
-![Admin Dashboard](assets/Admin%20Dashboard_112846~2.png)
+![Admin Dashboard](assets/Admin\Dashboard_112846~2.png)
 
 
 
