@@ -1,11 +1,11 @@
-<<<<<<< HEAD
+
 from flask import Flask,Blueprint,render_template,request,redirect,url_for,flash,session,current_app
 from models import get_all_courses, get_all_professors, get_all_lectures, get_all_classrooms,   generate_valid_timetables,add_lecture
 
 import logging
-=======
+
 from flask import Flask,Blueprint,render_template,request,redirect,url_for,session,current_app
->>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
+#>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
 import MySQLdb.cursors
 import re
 
@@ -109,7 +109,7 @@ def professor_register():
 
     return render_template('professor_register.html', message=message)
 
-<<<<<<< HEAD
+
 
 
 
@@ -138,5 +138,4 @@ def generate_professor_timetable():
         flash(f'Error generating timetable: {str(e)}', 'danger')
         return redirect(url_for('professor.regular_timetable'))
 
-=======
->>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
+#>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133

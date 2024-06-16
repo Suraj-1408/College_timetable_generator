@@ -1,10 +1,10 @@
 from  flask import Flask,render_template
 from flask_mysqldb import MySQL
-<<<<<<< HEAD
+
 #from models import create_tables
-=======
+
 from student import student_blp
->>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
+#>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
 
 app = Flask(__name__,template_folder='templates')
 
@@ -15,16 +15,16 @@ app.config['MYSQL_DB'] = 'college_schedule'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 
-<<<<<<< HEAD
+
 # Call create_tables during application initialization
 #create_tables()
-=======
->>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
+
+#>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
 
 app.secret_key = 'sadsmdsdeopmas'  # Necessary for session management
 
 
-<<<<<<< HEAD
+
 def register_blueprints(app):
 
         from student import student_blp
@@ -47,11 +47,11 @@ def register_blueprints(app):
 
 register_blueprints(app)
 
-=======
+
 student_blp.mysql = mysql
 
-app.register_blueprint(student_blp,url_prefix='/student')
->>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
+#app.register_blueprint(student_blp,url_prefix='/student')
+#>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
 
 @app.route('/')
 def home():
@@ -70,11 +70,9 @@ def home():
 #def logout():
 #    return render_template('/student_login.html')
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
+#>>>>>>> b7eacff66318ff1b9c8ad188eb0dd3fa68145133
 if __name__ == '__main__':
     app.run(debug=True)
     app.run(host='0.0.0.0', port=5000)
