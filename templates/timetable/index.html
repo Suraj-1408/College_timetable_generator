@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Admin</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Create a New Timetable</h1>
+        <a href="{{url_for('timetable.add_entry')}}" class="btn btn-primary mb-4">Add Entry</a>
+       <!-- <a href="/logout" class="btn btn-danger mb-4">Logout</a>    -->
+        <div class="accordion" id="timetableAccordion">
+            {% for day, entries in timetable.items() %}
+                <div class="card">
+                    <div class="card-header" id="heading{{ day }}">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ day }}" aria-expanded="true" aria-controls="collapse{{ day }}">
+                                {{ day }}
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapse{{ day }}" class="collapse" aria-labelledby="heading{{ day }}" data-parent="#timetableAccordion">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {% for entry in entries %}
+                                    <li class="list-group-item">
+                                        {{ entry.subject }}: {{ entry.start_time }} - {{ entry.end_time }}
+                                        <form action="{{url_for('timetable.delete_entry')}}" method="POST" class="float-right">
+                                            <input type="hidden" name="day" value="{{ day }}">
+                                            <input type="hidden" name="index" value="{{ loop.index0 }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
