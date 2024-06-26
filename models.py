@@ -1,11 +1,8 @@
-#from app import mysql
-#from flask import current_app
-#from TimeTable_Schedule import mysql 
-
 import logging
-import MySQLdb  # Import MySQLdb module here
+import MySQLdb  
+import pdb
 
-# Utility function to add a professor
+''' Utility function to add a professor
 def add_professor(professor_id, name):
     from app import mysql
     conn = mysql.connection
@@ -15,18 +12,117 @@ def add_professor(professor_id, name):
     cursor.execute(query, (professor_id, name))
     conn.commit()
     cursor.close()
+'''
 
+def  gen_professor_id():
+    from app import mysql
+
+    try:
+        conn = mysql.connection
+        cursor = conn.cursor()
+        
+        query = "SELECT MAX(CAST(SUBSTRING(professor_id, 6) AS UNSIGNED)) AS max_id FROM professors"
+        cursor.execute(query)
+        result = cursor.fetchone()
+
+        print(f"Result from the query:{result}")
+
+        next_no = 101
+        if result and result.get('max_id') is not None:
+            next_no = result['max_id']+ 1
+       
+        #return f"PUCSD{next_no:03d}"
+        professor_id = f"PUCSD{next_no}"
+        print(f"Generated professor ID:{professor_id}")
+        return professor_id
+
+    except Exception as e:
+        print(f"Error in gen_professor_id():{e}")
+        return None
+
+    finally:
+        #conn.commit()
+        cursor.close()
+        
+
+
+def add_professor(professor_id,name):
+    from app import mysql
+    conn = mysql.connection
+    cursor =conn.cursor()
+
+
+    try:        
+        query = "INSERT INTO professors (professor_id, name) VALUES (%s, %s)"
+        cursor.execute(query,(professor_id,name))
+        conn.commit()
+        flash('Professor Added Successfully','success')
+        #return professor_id
+
+        cursor.execute("SELECT professor_id FROM professors WHERE professor_id = %s",(professor_id,))
+        result = cursor.fetchone()
+        return result['professor_id']
+
+    except Exception as e:
+        print(f"Error in add_professor:{e}")
+        conn.rollback()
+        return None
+
+    finally:
+        cursor.close()
+        #conn.close()
 
 # Utility function to get all professors
 def get_all_professors():
+    
+        from app import mysql   
+        conn = mysql.connection
+        cursor = conn.cursor()
+
+        query = "SELECT * FROM professors"
+        cursor.execute(query)
+        professors = cursor.fetchall()
+        
+        
+        conn.commit()
+        cursor.close()
+
+
+
+
+
+
+#utility function for generarting course_id for msc & mca courses
+def gen_course_id(program_name,prefix,start_number):
     from app import mysql
     conn = mysql.connection
     cursor = conn.cursor()
-    query = "SELECT * FROM professors"
-    cursor.execute(query)
-    professors = cursor.fetchall()
-    cursor.close()
-    return professors
+
+    try:
+        query = f"select max(cast(substring(course_id,length(%s)+1)as unsigned)) as max_id from {program_name}"
+        cursor.execute(query,(prefix,))
+        result = cursor.fetchone()
+        max_id = result['max_id'] if result['max_id'] is not None else start_number - 1
+        next_id = max_id +1
+        return f"{prefix}{next_id}"
+
+    except Exception as e:
+        print(f'Error in gen_course_id():{e}')
+        return None
+
+    finally:
+        
+        cursor.close()
+        
+
+
+def gen_msc_course_id():
+    return gen_course_id('msc_courses','CS-',551)
+
+def gen_mca_course_id():
+    return gen_course_id('mca_courses','CA-',201)
+
+
 
 # Utility function to add a course
 def add_course(course_number, course_name, max_numb_students):
@@ -37,18 +133,6 @@ def add_course(course_number, course_name, max_numb_students):
     cursor.execute(query, (course_number, course_name, max_numb_students))
     conn.commit()
     cursor.close()
-
-# Utility function to get all courses
-def get_all_courses():
-    from app import mysql
-    conn = mysql.connection
-    cursor = conn.cursor()
-    query = "SELECT * FROM courses"
-    cursor.execute(query)
-    courses = cursor.fetchall()
-    cursor.close()
-    return courses
-
 
 
 # Utility function to associate professors with a course
@@ -100,20 +184,62 @@ def get_all_lectures():
 
 
 
-def add_classroom(classroom_name):
+
+
+#Utility function to generate classroom id by the system.
+def gen_classroom_id():
     from app import mysql
     conn = mysql.connection
     cursor = conn.cursor()
-    query = "INSERT INTO classrooms (classroom_name) VALUES (%s)"
-    cursor.execute(query, (classroom_name,))
-    conn.commit()
-    cursor.close()
+
+    try:
+        query = "Select max(cast(substring(classroom_id, 2) as unsigned)) as max_id from classrooms"
+        cursor.execute(query)
+        result = cursor.fetchone()
+        max_id = result['max_id'] if result['max_id'] is not None  else 0
+        next_id = max_id + 1
+        return f"C{next_id}"
+
+    except Exception as e:
+        print(f'Error in gen_classroom_id():{e}')
+        return None
+
+    finally:
+        conn.commit()
+        cursor.close()
+        
+
+
+
+
+def add_classroom(classroom_capacity):
+    from app import mysql
+    conn = mysql.connection
+    cursor = conn.cursor()
+
+    try:
+        classroom_id = gen_classroom_id()
+
+        if classroom_id:        
+            query = "INSERT INTO classrooms (classroom_id,classroom_capacity) VALUES (%s,%s)"
+            cursor.execute(query, (classroom_id,classroom_capacity))
+            conn.commit()
+            flash('Classroom added Successfully','success')
+        
+        else:
+            flash('Error while generating classroom Id','danger')
+
+    except Exception as e:
+        flash(f'Error adding Classroom:{e}','danger')
+
+    finally:
+        cursor.close()
 
 def get_all_classrooms():
     from app import mysql
     conn = mysql.connection
     cursor = conn.cursor()
-    query = "SELECT classroom_id, classroom_name,classroom_capacity FROM classrooms"
+    query = "SELECT classroom_id,classroom_capacity FROM classrooms"
     cursor.execute(query)
     classrooms = cursor.fetchall()
     cursor.close()
@@ -149,41 +275,25 @@ def create_tables():
     cursor.close()
 
 
-'''
-
-def is_conflict(existing_entries, new_entry):
-    for entry in existing_entries:
-        if entry['time_slot'] == new_entry['time_slot'] and entry['day_of_week'] == new_entry['day_of_week']:
-            if entry['course']['course_id'] == new_entry['course']['course_id']:
-                return True
-    return False
-'''
-
-
-def generate_valid_timetables():
-    logging.debug('Entered generate_valid_timetables function')
-
+def get_all_msc_courses():
     from app import mysql
     conn = mysql.connection
     cursor = conn.cursor()
 
-    # Fetch existing lectures
-    lectures = get_all_lectures()
-
-    logging.debug(f'Lectures: {lectures}')  # Log the data to check the structure
-
-    timeslots = ['9:30 - 10:30', '10:30 - 11:30', '11:30 - 12:30', '12:30 - 1:30', '2:30 - 3:30', '3:30 - 4:30', '4:30 - 5:30']
-    days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-
-    timetable = {day: {timeslot: None for timeslot in timeslots} for day in days_of_week}
-
-    for lecture in lectures:
-        course_name = lecture['course_name']
-        time_slot = lecture['time_slot']
-        day_of_week = lecture['day_of_week']
-        if timetable[day_of_week][time_slot] is None:
-            timetable[day_of_week][time_slot] = course_name
-
+    query = "Select * from msc_courses"
+    cursor.execute(query)
+    msc_courses = cursor.fetchall()
     cursor.close()
-    logging.debug(f'Generated timetable: {timetable}')
-    return timetable, timeslots, days_of_week
+    return msc_courses
+
+
+def get_all_mca_courses():
+    from app import mysql
+    conn = mysql.connection
+    cursor = conn.cursor()
+
+    query = "Select * from mca_courses"
+    cursor.execute(query)
+    mca_courses = cursor.fetchall()
+    cursor.close()
+    return mca_courses
