@@ -27,7 +27,8 @@ And finally after all inputs a timetable gets generated in the form of pdf , tha
 ADMIN DASHBOARD
 ![Admin Dashboard](assets/Admin_dashboard.png)
 
-
+## VIEW PROFESSORS
+![Professors](assets/Professors.png)
 
 
 ## Student & Professor
