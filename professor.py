@@ -1,5 +1,5 @@
 from flask import Flask,Blueprint,render_template,request,redirect,url_for,flash,session,current_app
-from models import get_all_courses, get_all_professors, get_all_lectures, get_all_classrooms,   generate_valid_timetables,add_lecture
+from models import  get_all_professors, get_all_lectures, get_all_classrooms,add_lecture
 
 import logging
 import MySQLdb.cursors

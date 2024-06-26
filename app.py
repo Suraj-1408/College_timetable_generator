@@ -18,7 +18,6 @@ app.secret_key = 'sadsmdsdeopmas'  # Necessary for session management
 
 
 def register_blueprints(app):
-
         from student import student_blp
         from professor import professor_blp
         from admin import admin_blp
@@ -44,19 +43,7 @@ register_blueprints(app)
 def home():
     return render_template('home.html')
 
-#@app.route('/student_login',methods = ['GET','POST'])
-#def student_login():
-#   return render_template('student_login.html')
-
-
-#@app.route('/student/student_register')
-#def student_register():
-#    return render_template('student_register.html')
-
-#@app.route('/student')
-#def logout():
-#    return render_template('/student_login.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
     app.run(host='0.0.0.0', port=5000)
