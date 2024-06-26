@@ -120,7 +120,6 @@
 		<thead>
 		<tr>
 			<th>ClassRoom Id</th>
-			<th>ClassRoom Name</th>
 			<th>ClassRoom Capacity</th>
 			<th>Action</th>
 		</tr>
@@ -130,12 +129,12 @@
 			{% for classroom in classrooms %}
 		<tr>
 			<td> {{ classroom.classroom_id }} </td>
-			<td> {{ classroom.classroom_name  }} </td>
 			<td> {{ classroom.classroom_capacity }} </td>
 			<td class="action-buttons">
 				<form method="POST" action="{{ url_for('admin.delete_classroom', classroom_id=classroom.classroom_id) }} " style="display:inline;">
 				<button type="submit" class="btn btn-danger"> Delete </button>
 				</form>
+                <a href=" {{url_for('admin.update_classroom',classroom_id=classroom.classroom_id)}}" class="btn btn-primary">Update</a>
 			</td>
 
 		</tr>

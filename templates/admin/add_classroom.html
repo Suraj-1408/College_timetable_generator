@@ -60,7 +60,7 @@
             background-color: #555;
             color: white;
             padding: 10px 20px;
-            text-decoration: none;
+            text-decoration: none; 
             border-radius: 5px;
             border: none;
             cursor: pointer;
@@ -83,11 +83,6 @@
     <h1>Add Classroom</h1>
     <form method="POST" action="{{ url_for('admin.add_classroom_view') }}">
         {{ form.hidden_tag() }}
-
-        <div>
-            {{ form.classroom_name.label }}<br>
-            {{ form.classroom_name(size=32) }}
-        </div>
 
         <div>
             {{ form.classroom_capacity.label }}<br>
