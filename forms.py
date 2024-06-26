@@ -3,18 +3,23 @@ from wtforms import StringField, SubmitField, IntegerField, SelectField, SelectM
 from wtforms.validators import DataRequired, Length, NumberRange
 
 class AddProfessorForm(FlaskForm):
-    professor_id = StringField('Professor ID', validators=[DataRequired(), Length(max=6)])
+    #professor_id = StringField('Professor ID', validators=[DataRequired(), Length(max=6)])
     name = StringField('Professor Name', validators=[DataRequired(), Length(max=25)])
     submit = SubmitField('Add Professor')
 
 class AddCourseForm(FlaskForm):
-    course_number = StringField('Course Number', validators=[DataRequired(), Length(max=5)])
-    course_name = StringField('Course Name', validators=[DataRequired(), Length(max=40)])
-    max_numb_students = IntegerField('Max Number of Students', validators=[DataRequired(), NumberRange(min=1)])
-   # professors = QuerySelectMultipleField('Course Professors', query_factory=professor_choices, get_label='name')
-    professors = SelectMultipleField('Course Professors', coerce=int)  # Use int for professor IDs
+    course_name = StringField('Course Name', validators=[DataRequired()])
+    professor_name = SelectField('Professor', coerce=str, validators=[DataRequired()])
+    total_credits = IntegerField('Total Credits', validators=[DataRequired()])
+    no_of_lectures = IntegerField('No. of Lectures per Week', validators=[DataRequired()])
     submit = SubmitField('Add Course')
 
+class AddMCACourseForm(FlaskForm):
+    course_name = StringField('course Name',validators=[DataRequired()])
+    professor_name = SelectField('Professor',coerce=str, validators=[DataRequired()])
+    total_credits = IntegerField('Total Credits',validators=[DataRequired()])
+    no_of_lectures = IntegerField('No of Lectures per Week', validators=[DataRequired()])
+    submit = SubmitField('Add Course')
 
 
 class AddLectureForm(FlaskForm):
@@ -42,7 +47,10 @@ class AddLectureForm(FlaskForm):
     submit = SubmitField('Schedule Lecture.')
 
 class AddClassroomForm(FlaskForm):
-    classroom_name = StringField('Classroom Name', validators = [DataRequired()])
+    classroom_id = StringField('Classroom ID') 
     classroom_capacity = IntegerField('Classroom Capacity', validators = [DataRequired(),NumberRange(min=1)])
-    submit = SubmitField(' Add Classroom ')
+    submit = SubmitField('Add Classroom')
 
+class UpdateClassroomForm(FlaskForm):
+    classroom_capacity = IntegerField('Classroom Capacity',validators = [DataRequired()])
+    submit = SubmitField('Update Classroom')

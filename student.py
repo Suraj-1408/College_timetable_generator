@@ -1,6 +1,6 @@
 from flask import Flask,Blueprint,render_template,request,redirect,url_for,session,current_app
 #from flask_mysqldb import MySQL
-from models import get_all_courses, get_all_professors, get_all_lectures, get_all_classrooms,   generate_valid_timetables,add_lecture
+from models import  get_all_lectures, get_all_classrooms
 
 import logging
 import MySQLdb.cursors
@@ -100,33 +100,4 @@ def student_register():
 @student_blp.route('/')
 def dashboard():
     return render_template('student_dashboard.html')
-
-
-
-@student_blp.route('/generate_timetable', methods=['GET', 'POST'])
-def generate_timetable():
-    try:
-        logging.debug('Entered generate_timetable route')
-
-        # Generate timetable combinations
-        timetable, timeslots, days_of_week = generate_valid_timetables()
-        logging.debug(f'Timetable: {timetable}')
-        logging.debug(f'Timeslots: {timeslots}')
-        logging.debug(f'Days of Week: {days_of_week}')
-
-        # Render the generated timetable to HTML
-        return render_template('Regular_timetable.html', timetable=timetable, timeslots=timeslots, days_of_week=days_of_week)
-
-    except Exception as e:
-        logging.error(f'Error generating timetable: {str(e)}')
-        flash(f'Error generating timetable: {str(e)}', 'danger')
-        return redirect(url_for('student.Regular_timetable'))
-
-
-
-
-
-#    if __name__ == "__main__":
-#        app.debug = True
-#        app.run(host='0.0.0.0', port=5000)
-        
+    
