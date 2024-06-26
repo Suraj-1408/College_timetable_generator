@@ -5,7 +5,7 @@ existing timetable according to different circumstances.Futher it also manages i
 and conflict free timetable for students leading to appropriate synchronization between students and professors.
 
 ## HomePage
-![Home](assets/Home_112857~2.png)
+![Home](assets/Home.png)
 
 
 # Functionalities of this application
