@@ -6,6 +6,8 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 
     <style>
         body {
@@ -84,17 +86,28 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ url_for('admin.list_professors') }}">Teaching Professors</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ url_for('admin.list_courses') }}">Existing Courses</a>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Existing Programs
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url_for('admin.list_msc_courses', course_type='MSC') }}">MSC</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.list_mca_courses', course_type='MCA') }}">MCA</a>
+                            </div>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ url_for('admin.list_classrooms') }}">ClassRooms</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ url_for('admin.list_lectures')}}">Lectures</a>
+                            <a class="nav-link" href="{{ url_for('admin.list_lectures')}}"></a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ url_for('timetable.generate_timetable') }}">Generate Timetable</a>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Generate Timetable</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url_for('admin.generate_msc_timetable') }}">MSC</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.generate_mca_timetable') }}">MCA</a>
+                            </div>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ url_for('admin.logout') }}">Logout</a>
@@ -103,13 +116,12 @@
                 </div>
             </nav>
         </header>
-
         <main role="main">
             <div class="jumbotron">
                 <div class="container">
-                    <h1 class="display-4">Hello {{ session.admin_name }}</h1>
-                    <p>Welcome to a timetable management system for colleges and universities to schedule their organization's timetable. TTGS started off as a company that formed strong relationships with schools, colleges, and universities to help them generate their timetable with ease and maximum efficiency, thus saving the organization's valuable time. Get started by referring to the flow of the system below or Contact Us with any queries or difficulties.</p>
-                    <p><a class="btn btn-primary btn-lg" href="{{ url_for('timetable.generate_timetable')}}" role="button">Get Started &raquo;</a>&nbsp;&nbsp;&nbsp;</p>
+                    <h1 class="display-4">Welcome {{ session.admin_name }}</h1>
+                    <p>Welcome to a timetable management system for colleges and universities to schedule their organization's timetable.Schools, Colleges, and Universities can use this application inorder to create and manage timetable and help them to generate their timetable with ease and maximum efficiency, thus saving the organization's valuable time.</p>
+                    <p><a class="btn btn-primary btn-lg" href=" " role="button">Get Started &raquo;</a>&nbsp;&nbsp;&nbsp;</p>
                 </div>
             </div>
 
@@ -117,30 +129,22 @@
                 <div class="row">
                     <div class="col-md-4">
                         <h2>1. Add Professor</h2>
-                        <p>Navigate to the "Add Professor" section and add the corresponding details. Incorrect details can also be removed via the "Edit Teacher" option.</p>
+                        <p>Navigate to the "Add Professor" section and add the corresponding details. Incorrect details can also be removed via the "Delete/Update" option.</p>
                     </div>
                     <div class="col-md-4">
                         <h2>2. Add ClassRooms</h2>
-                        <p>Navigate to the "Add Rooms" section and add the corresponding details. Incorrect details can also be removed via the "Edit Rooms" option.</p>
+                        <p>Navigate to the "Add Rooms" section and add the corresponding details. Incorrect details can also be removed via the "Delete/Update" option.</p>
                     </div>
                     <div class="col-md-4">
-                        <h2>3. Add Timings</h2>
-                        <p>Navigate to the "Add Timings" section and add the corresponding details. Incorrect details can also be removed via the "Edit Timings" option.</p>
+                        <h2>3. Add Courses</h2>
+                        <p>Navigate to the "Add Courses" section and add the corresponding details. Incorrect details can also be removed via the "Delete/Update" option.</p>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-md-4">
-                        <h2>4. Add Courses</h2>
-                        <p>Navigate to the "Add Courses" section and add the corresponding details. Incorrect details can also be removed via the "Edit Courses" option.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h2>5. Add Sections</h2>
-                        <p>Navigate to the "Add Sections" section and add the corresponding details. Incorrect details can also be removed via the "Edit Sections" option.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h2>6. Generate Timetable</h2>
-                        <p>Navigate to the "Generate Timetable" section and click on "Generate Timetable" and wait patiently as our algorithm works its magic.</p>
+                        <h2>4. Generate Timetable</h2>
+                        <p>Navigate to the "Generate Timetable" section and click on "MSC/MCA" option.Multiple combination of timetable gets generated for respective program out which one get implemented in orgranisation depending organisation decision. </p>
                     </div>
                 </div>
                 <br>
@@ -150,9 +154,14 @@
         </main>
 
         <footer class="container">
-            <p>&copy; ttgs. All Rights Reserved</p>
+            <p>&copy;All Rights Reserved</p>
         </footer>
     </form>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
 
