@@ -108,13 +108,7 @@
     <h1>Add Professor</h1>
     <form method="POST" action="{{ url_for('admin.add_professor_view') }}">
         {{ form.hidden_tag() }}
-        <div>
-            {{ form.professor_id.label }}<br>
-            {{ form.professor_id(size=32) }}<br>
-            {% for error in form.professor_id.errors %}
-                <span>[{{ error }}]</span><br>
-            {% endfor %}
-        </div>
+        
         <div>
             {{ form.name.label }}<br>
             {{ form.name(size=32) }}<br>
@@ -132,5 +126,16 @@
             <a href="{{ url_for('admin.list_professors') }}" class="btn btn-secondary">View Professors</a>
         </p>
     </div>
+
+    {% with messages = get_flashed_messages(with_categories=true)%}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category,message in messages %}
+                    <li class="alert alert-{{ category }}">{{ message }}</li>
+                {%  endfor %}
+            </ul>    
+        {% endif %}
+    {% endwith%}
+
 </body>
 </html>
