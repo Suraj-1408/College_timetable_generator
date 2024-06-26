@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Sigin</title>
+    <title>Admin Signin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
         <h2>Admin Login</h2>
 
-        <form  method="POST" action ="{{ url_for('admin.admin_login') }}" >
+        <form method="POST" action="{{ url_for('admin.admin_login') }}">
 
             {% if mesage is defined and mesage %}
             
